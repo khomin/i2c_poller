@@ -44,7 +44,8 @@ void* I2c_poll::pollExect() {
                     while (!feof(stream))
                     if (fgets(reply_buff, sizeof(reply_buff), stream) != NULL) data.append(reply_buff);
                         pclose(stream);
-                    }
+                }
+                fprintf(stdout, "shell result %s\r\n", data.c_str());
                 // ...
                 // проверяем ответ
                 reply_buff[reply_len++] = 0xF0;
