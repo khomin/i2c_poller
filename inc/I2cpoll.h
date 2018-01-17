@@ -26,7 +26,7 @@ private:
     DbConnection * db = new DbConnection();
 
     E_I2c_device startDeviceType = dev_i2c_tmp112;
-    const E_I2c_device endTypeDeviceType = dev_i2c_tmp112;
+    const E_I2c_device endTypeDeviceType = dev_i2c_txs02324;
     int currentDeviceType;
 
     std::string getDeviceNameOfType(E_I2c_device typeDev);

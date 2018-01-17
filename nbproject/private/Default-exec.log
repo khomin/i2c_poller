@@ -1,0 +1,30 @@
+called: g++
+	/home/khomin/Projects/imx_board/i2c_poll
+	g++
+	-Wall
+	-std=c++11
+	-pthread
+	-g
+	-O0
+	-DDEBUG
+	-I/usr/include/postgresql
+	./src/I2cpoll.cpp
+	-c
+	-o
+	./build/I2cpoll.o
+
+called: g++
+	/home/khomin/Projects/imx_board/i2c_poll
+	g++
+	-Wall
+	-std=c++11
+	-pthread
+	-g
+	-O0
+	-DDEBUG
+	-I/usr/include/postgresql
+	./src/DbConnection.cpp
+	-c
+	-o
+	./build/DbConnection.o
+

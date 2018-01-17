@@ -6,6 +6,9 @@
  */
 
 #include "../inc/I2cpoll.h"
+#include <iostream>
+#include <stdlib.h>
+#include <stdio.h>
 
 I2c_poll::I2c_poll() {    
     db = new DbConnection();
@@ -14,15 +17,16 @@ I2c_poll::I2c_poll() {
     } else {
         fprintf(stderr, "db open -ERROR\r\n");
     }
-    
     this->currentDeviceType = startDeviceType;
 }
 
 void* I2c_poll::pollExect() {
+    FILE *stream;
     int i = 0;
     uint16_t raw_data = 0;
-    char reply_buff[64] = {0};
+    char reply_buff[512] = {0};
     int reply_len = 0;
+    std::string data;
     char cmd_command[128] = {0};
     S_insertData device_data;    
     int device_addr = 0;
@@ -35,6 +39,12 @@ void* I2c_poll::pollExect() {
             if(device_addr != 0) {
                 sprintf(cmd_command, "i2cget 0 %X 0x00 w", device_addr); //i2cget 0 0x48 0x00 w
                 // отправляем в консоль
+                stream = popen(cmd_command, "r");
+                if (stream) {
+                    while (!feof(stream))
+                    if (fgets(reply_buff, sizeof(reply_buff), stream) != NULL) data.append(reply_buff);
+                        pclose(stream);
+                    }
                 // ...
                 // проверяем ответ
                 reply_buff[reply_len++] = 0xF0;
@@ -45,6 +55,7 @@ void* I2c_poll::pollExect() {
                 }
                 device_data.parameter.temp.temp = device_data.parameter.temp.temp * 0.0625;
                 fprintf(stdout, "Temp %4.2f", device_data.parameter.temp.temp);
+                db->insertData(device_data);
             }
             break;
             
@@ -92,6 +103,7 @@ void* I2c_poll::pollExect() {
                         break;
                     }
                 }
+                db->insertData(device_data);
             }
             break;
             
@@ -106,7 +118,7 @@ void* I2c_poll::pollExect() {
             break;
     }
        
-    if(currentDeviceType >= (E_I2c_device)dev_i2c_txs02324) {
+    if(currentDeviceType >= (E_I2c_device)endTypeDeviceType) {
         currentDeviceType = startDeviceType;
         fprintf(stdout, "I2c parce -endDev\r\n");
     } else {
