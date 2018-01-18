@@ -26,14 +26,18 @@ bool I2c_poll::readWord(char *cmd_command, uint16_t *p_word) {
     FILE *stream;
     // отправляем в консоль
     stream = popen(cmd_command, "r");
-    stream = popen("\r", "r");
+    fprintf(stdout, "cmd_command - %s\r\n", cmd_command);
+    
     std::string data;
     if (stream) {
         char reply_buff[128] = {0};
         while (!feof(stream))
-        if(fgets(reply_buff, sizeof(reply_buff), stream) != NULL) data.append(reply_buff);
-            pclose(stream);
+        if(fgets(reply_buff, sizeof(reply_buff), stream) != NULL) {
+            data.append(reply_buff);
+        }
+        pclose(stream);
     }
+    
     // проверяем ответ
 //    data.insert(0, "I will read from device file /dev/i2c-0,\r\n0x401d\r\n");
     fprintf(stdout, "shell result :\r\n%s\r\n", data.c_str());
@@ -65,7 +69,7 @@ void* I2c_poll::pollExect() {
             
             device_addr = db->getDeviceAddrFromName(i2c_Dev_typeName.tmp112.name_text.c_str());
             if(device_addr != 0) {
-                sprintf(cmd_command, "i2cget -y 0 %X 0x00 w", device_addr); //i2cget 0 0x48 0x00 w
+                sprintf(cmd_command, "i2cget -y 0 0x%X 0x00 w\r\n", device_addr); //i2cget 0 0x48 0x00 w
                 if(readWord(cmd_command, &word)) {  // проверяем ответ
                     p_data = (uint8_t*)&word;
                     device_data.parameter.temp.temp = (p_data[0] * 256 + p_data[1]) / 16;

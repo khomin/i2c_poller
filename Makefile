@@ -4,7 +4,7 @@ DEST_PATH = /usr/bin
 BUILD_MODE = run
 NAME_BIN = i2c_poll
 
-CPPFLAGS += -I/usr/include/postgresql
+CPPFLAGS += 
 
 ifeq ($(BUILD_MODE),debug)
 	CFLAGS += -g

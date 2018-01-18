@@ -8,7 +8,7 @@
 #ifndef DBCONNECTION_H_
 #define DBCONNECTION_H_
 
-#include <postgresql/libpq-fe.h>
+#include <libpq-fe.h>
 #include <iostream>
 #include <string.h>
 #include <memory>

@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <iostream>
 #include <string.h>
-#include <postgresql/libpq-fe.h>
+#include <libpq-fe.h>
 #include <thread>
 #include <unistd.h>
 #include <sys/stat.h>

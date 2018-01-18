@@ -13,7 +13,6 @@
         </df>
       </df>
       <df name="src">
-        <in>Accel.cpp</in>
         <in>DbConnection.cpp</in>
         <in>I2cpoll.cpp</in>
         <in>global.cpp</in>
@@ -37,7 +36,7 @@
   <confs>
     <conf name="Default" type="0" platformSpecific="true">
       <toolsSet>
-        <compilerSet>GNU_ARM|GNU</compilerSet>
+        <compilerSet>gnu-arm|GNU</compilerSet>
         <platform>2</platform>
         <dependencyChecking>false</dependencyChecking>
         <rebuildPropChanged>false</rebuildPropChanged>
@@ -50,9 +49,9 @@
       <makefileType>
         <makeTool>
           <buildCommandWorkingDir>.</buildCommandWorkingDir>
-          <buildCommand>${MAKE} -f Makefile</buildCommand>
-          <cleanCommand>${MAKE} -f Makefile clean</cleanCommand>
-          <executablePath>build/out</executablePath>
+          <buildCommand>${MAKE} all</buildCommand>
+          <cleanCommand>${MAKE} clean</cleanCommand>
+          <executablePath>build/i2cPoller</executablePath>
           <cTool>
             <incDir>
               <pElem>inc</pElem>
@@ -63,8 +62,9 @@
           </cTool>
         </makeTool>
         <preBuild>
-          <preBuildCommandWorkingDir>.</preBuildCommandWorkingDir>
-          <preBuildCommand></preBuildCommand>
+          <preBuildCommandWorkingDir>/usr/bin</preBuildCommandWorkingDir>
+          <preBuildCommand>source /opt/dey/2.2-r3/environment-setup-cortexa7hf-neon-dey-linux-gnueabi</preBuildCommand>
+          <preBuildFirst>true</preBuildFirst>
         </preBuild>
       </makefileType>
       <item path="build/.metadata/.plugins/org.eclipse.cdt.make.core/specs.c"
@@ -91,17 +91,6 @@
         <ccTool flags="0">
           <incDir>
             <pElem>/usr/include/postgresql</pElem>
-          </incDir>
-          <preprocessorList>
-            <Elem>DEBUG</Elem>
-          </preprocessorList>
-        </ccTool>
-      </item>
-      <item path="src/Accel.cpp" ex="false" tool="1" flavor2="8">
-        <ccTool flags="0">
-          <incDir>
-            <pElem>/usr/include/postgresql</pElem>
-            <pElem>.</pElem>
           </incDir>
           <preprocessorList>
             <Elem>DEBUG</Elem>

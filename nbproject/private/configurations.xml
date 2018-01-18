@@ -15,14 +15,12 @@
         </df>
       </df>
       <df name="inc">
-        <in>Accel.h</in>
         <in>DbConnection.h</in>
         <in>I2cpoll.h</in>
         <in>global.h</in>
         <in>logger.h</in>
       </df>
       <df name="src">
-        <in>Accel.cpp</in>
         <in>DbConnection.cpp</in>
         <in>I2cpoll.cpp</in>
         <in>global.cpp</in>
@@ -56,8 +54,6 @@
         <gdb_interceptlist>
           <gdbinterceptoptions gdb_all="false" gdb_unhandled="true" gdb_unexpected="true"/>
         </gdb_interceptlist>
-        <gdb_signals>
-        </gdb_signals>
         <gdb_options>
           <DebugOptions>
           </DebugOptions>
