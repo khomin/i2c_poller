@@ -1,0 +1,6 @@
+/home/khomin/Projects/i2c_poll/Debug/CMakeFiles/install.dir
+/home/khomin/Projects/i2c_poll/Debug/CMakeFiles/list_install_components.dir
+/home/khomin/Projects/i2c_poll/Debug/CMakeFiles/i2c_poll.dir
+/home/khomin/Projects/i2c_poll/Debug/CMakeFiles/install/local.dir
+/home/khomin/Projects/i2c_poll/Debug/CMakeFiles/rebuild_cache.dir
+/home/khomin/Projects/i2c_poll/Debug/CMakeFiles/edit_cache.dir

@@ -10,7 +10,7 @@
 
 #include <stdio.h>
 #include <string>
-#include "../inc/global.h"
+#include "global.h"
 #include "DbConnection.h"
 
 using namespace std;

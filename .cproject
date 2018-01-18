@@ -1,66 +1,63 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?fileVersion 4.0.0?><cproject storage_type_id="org.eclipse.cdt.core.XmlProjectDescriptionStorage">
 	<storageModule moduleId="org.eclipse.cdt.core.settings">
-		<cconfiguration id="cdt.managedbuild.toolchain.gnu.base.2142418064">
-			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="cdt.managedbuild.toolchain.gnu.base.2142418064" moduleId="org.eclipse.cdt.core.settings" name="Default">
+		<cconfiguration id="org.yocto.cmake.managedbuilder.configuration.gnu.exe.debug.1704079511">
+			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="org.yocto.cmake.managedbuilder.configuration.gnu.exe.debug.1704079511" moduleId="org.eclipse.cdt.core.settings" name="Debug">
 				<externalSettings/>
 				<extensions>
-					<extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
-					<extension id="org.eclipse.cdt.core.GmakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GNU_ELF" point="org.eclipse.cdt.core.BinaryParser"/>
 					<extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
-					<extension id="org.eclipse.cdt.core.CWDLocator" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
-					<extension id="org.eclipse.cdt.core.VCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 				</extensions>
 			</storageModule>
 			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
-				<configuration artifactName="i2c_poll" buildProperties="" description="" id="cdt.managedbuild.toolchain.gnu.base.2142418064" name="Default" parent="org.eclipse.cdt.build.core.emptycfg">
-					<folderInfo id="cdt.managedbuild.toolchain.gnu.base.2142418064.1777593937" name="/" resourcePath="">
-						<toolChain id="org.eclipse.cdt.build.core.prefbase.toolchain.2125856106" name="No ToolChain" resourceTypeBasedDiscovery="true" superClass="org.eclipse.cdt.build.core.prefbase.toolchain">
-							<targetPlatform id="org.eclipse.cdt.build.core.prefbase.toolchain.2125856106.1919714437" name=""/>
-							<builder autoBuildTarget="all" cleanBuildTarget="clean" enableAutoBuild="false" enableCleanBuild="true" enabledIncrementalBuild="true" id="org.eclipse.cdt.build.core.settings.default.builder.1768093393" incrementalBuildTarget="all" keepEnvironmentInBuildfile="false" managedBuildOn="false" name="Gnu Make Builder" parallelizationNumber="1" superClass="org.eclipse.cdt.build.core.settings.default.builder"/>
-							<tool id="org.eclipse.cdt.build.core.settings.holder.libs.248882299" name="holder for library settings" superClass="org.eclipse.cdt.build.core.settings.holder.libs"/>
+				<configuration artifactName="${ProjName}" buildArtefactType="org.yocto.sdk.ide.buildArtefact.cmake.exe" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.yocto.sdk.ide.buildArtefact.cmake.exe,org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug" cleanCommand="rm -rf" description="Builds a version of the project which is ready for debugging" id="org.yocto.cmake.managedbuilder.configuration.gnu.exe.debug.1704079511" name="Debug" parent="org.yocto.cmake.managedbuilder.configuration.gnu.exe.debug">
+					<folderInfo id="org.yocto.cmake.managedbuilder.configuration.gnu.exe.debug.1704079511." name="/" resourcePath="">
+						<toolChain id="org.yocto.cmake.managedbuilder.toolchain.gnu.exe.debug.600084631" name="Yocto CMake Build (Toolchain)" superClass="org.yocto.cmake.managedbuilder.toolchain.gnu.exe.debug">
+							<targetPlatform id="org.yocto.cmake.managedbuilder.target.gnu.exe.debug.1430862909" isAbstract="false" name="Debug Platform" superClass="org.yocto.cmake.managedbuilder.target.gnu.exe.debug"/>
+							<builder buildPath="${workspace_loc:/i2c_poll}/Debug" id="org.yocto.cmake.managedbuilder.builder.gnu.exe.debug.164736396" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="Yocto CMake Environment Builder" superClass="org.yocto.cmake.managedbuilder.builder.gnu.exe.debug"/>
+							<tool id="org.yocto.cmake.managedbuilder.cmakeconfigure.gnu.exe.debug.904733938" name="CMake configure" superClass="org.yocto.cmake.managedbuilder.cmakeconfigure.gnu.exe.debug"/>
+							<tool id="org.yocto.cmake.managedbuilder.compiler.gnu.exe.debug.1094863678" name="GCC C++ Compiler" superClass="org.yocto.cmake.managedbuilder.compiler.gnu.exe.debug">
+								<option id="gnu.cpp.compiler.option.optimization.level.1283618453" name="Optimization Level" superClass="gnu.cpp.compiler.option.optimization.level" value="gnu.cpp.compiler.optimization.level.none" valueType="enumerated"/>
+								<option id="gnu.cpp.compiler.option.debugging.level.527069812" name="Debug Level" superClass="gnu.cpp.compiler.option.debugging.level" value="gnu.cpp.compiler.debugging.level.max" valueType="enumerated"/>
+								<option id="gnu.cpp.compiler.option.include.paths.412719022" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
+									<listOptionValue builtIn="false" value="/home/khomin/Projects/i2c_poll/inc"/>
+								</option>
+							</tool>
+							<tool id="org.yocto.cmake.managedbuilder.linker.gnu.exe.debug.1791298472" name="GCC C++ Linker" superClass="org.yocto.cmake.managedbuilder.linker.gnu.exe.debug"/>
+							<tool id="org.yocto.cmake.managedbuilder.compiler.gnu.exe.c.debug.748272191" name="GCC C Compiler" superClass="org.yocto.cmake.managedbuilder.compiler.gnu.exe.c.debug">
+								<option defaultValue="gnu.c.optimization.level.none" id="gnu.c.compiler.option.optimization.level.1935332315" name="Optimization Level" superClass="gnu.c.compiler.option.optimization.level" valueType="enumerated"/>
+								<option id="gnu.c.compiler.option.debugging.level.2017671256" name="Debug Level" superClass="gnu.c.compiler.option.debugging.level" value="gnu.c.debugging.level.max" valueType="enumerated"/>
+								<option id="gnu.c.compiler.option.include.paths.819769306" superClass="gnu.c.compiler.option.include.paths" valueType="includePath">
+									<listOptionValue builtIn="false" value="/home/khomin/Projects/i2c_poll/inc"/>
+								</option>
+								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.869414727" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
+							</tool>
+							<tool id="org.yocto.cmake.managedbuilder.linker.gnu.exe.c.debug.89771730" name="GCC C Linker" superClass="org.yocto.cmake.managedbuilder.linker.gnu.exe.c.debug">
+								<inputType id="cdt.managedbuild.tool.gnu.c.linker.input.542125219" superClass="cdt.managedbuild.tool.gnu.c.linker.input">
+									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
+									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
+								</inputType>
+							</tool>
 						</toolChain>
 					</folderInfo>
+					<sourceEntries>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="inc"/>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
+					</sourceEntries>
 				</configuration>
 			</storageModule>
 			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
 		</cconfiguration>
 	</storageModule>
 	<storageModule moduleId="cdtBuildSystem" version="4.0.0">
-		<project id="i2c_poll.null.330710118" name="i2c_poll"/>
-	</storageModule>
-	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
-	<storageModule moduleId="refreshScope" versionNumber="1">
-		<resource resourceType="PROJECT" workspacePath="/i2c_poll"/>
-	</storageModule>
-	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings">
-		<doc-comment-owner id="org.eclipse.cdt.internal.ui.text.doctools.NullDocCommentOwner">
-			<path value=""/>
-		</doc-comment-owner>
+		<project id="i2c_poll.org.yocto.sdk.ide.projectTypeCMake.1531845718" name="Yocto Project SDK CMake Project" projectType="org.yocto.sdk.ide.projectTypeCMake"/>
 	</storageModule>
 	<storageModule moduleId="scannerConfiguration">
 		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
-		<scannerConfigBuildInfo instanceId="0.1262617568">
+		<scannerConfigBuildInfo instanceId="org.yocto.cmake.managedbuilder.configuration.gnu.exe.debug.1704079511;org.yocto.cmake.managedbuilder.configuration.gnu.exe.debug.1704079511.;org.yocto.cmake.managedbuilder.compiler.gnu.exe.c.debug.748272191;cdt.managedbuild.tool.gnu.c.compiler.input.869414727">
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
-		</scannerConfigBuildInfo>
-		<scannerConfigBuildInfo instanceId="cdt.managedbuild.toolchain.gnu.base.2142418064;cdt.managedbuild.toolchain.gnu.base.2142418064.1777593937;cdt.managedbuild.tool.gnu.c.compiler.base.1088733772;cdt.managedbuild.tool.gnu.c.compiler.input.1595313229">
-			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfileC"/>
-		</scannerConfigBuildInfo>
-		<scannerConfigBuildInfo instanceId="cdt.managedbuild.toolchain.gnu.cross.base.423624528;cdt.managedbuild.toolchain.gnu.cross.base.423624528.1566107568;cdt.managedbuild.tool.gnu.cross.c.compiler.75072624;cdt.managedbuild.tool.gnu.c.compiler.input.979459399">
-			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
-		</scannerConfigBuildInfo>
-		<scannerConfigBuildInfo instanceId="cdt.managedbuild.toolchain.gnu.cross.base.423624528;cdt.managedbuild.toolchain.gnu.cross.base.423624528.1566107568;cdt.managedbuild.tool.gnu.cross.cpp.compiler.1961052857;cdt.managedbuild.tool.gnu.cpp.compiler.input.1423844604">
-			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
-		</scannerConfigBuildInfo>
-		<scannerConfigBuildInfo instanceId="cdt.managedbuild.toolchain.gnu.base.2142418064;cdt.managedbuild.toolchain.gnu.base.2142418064.1777593937;cdt.managedbuild.tool.gnu.cpp.compiler.base.1892748955;cdt.managedbuild.tool.gnu.cpp.compiler.input.785571293">
-			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.make.core.GCCStandardMakePerFileProfile"/>
-		</scannerConfigBuildInfo>
-		<scannerConfigBuildInfo instanceId="0.1094458247">
-			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
-		</scannerConfigBuildInfo>
-		<scannerConfigBuildInfo instanceId="cdt.managedbuild.toolchain.gnu.base.2142418064">
-			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfileCPP"/>
 		</scannerConfigBuildInfo>
 	</storageModule>
+	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
 </cproject>
