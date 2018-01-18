@@ -65,7 +65,7 @@ void* I2c_poll::pollExect() {
             
             device_addr = db->getDeviceAddrFromName(i2c_Dev_typeName.tmp112.name_text.c_str());
             if(device_addr != 0) {
-                sprintf(cmd_command, "i2cget 0 %X 0x00 w", device_addr); //i2cget 0 0x48 0x00 w
+                sprintf(cmd_command, "i2cget -y 0 %X 0x00 w", device_addr); //i2cget 0 0x48 0x00 w
                 if(readWord(cmd_command, &word)) {  // проверяем ответ
                     p_data = (uint8_t*)&word;
                     device_data.parameter.temp.temp = (p_data[0] * 256 + p_data[1]) / 16;
@@ -80,56 +80,56 @@ void* I2c_poll::pollExect() {
             break;
             
         case dev_i2c_ina260:
-            device_addr = db->getDeviceAddrFromName(i2c_Dev_typeName.tmp112.name_text.c_str());
-            if(device_addr != 0) {                
-                for(int i=0; i<3; i++) {                    
-                        switch(i) { // cur
-                        case 0: //{i2cget 0 0x40 0x01 w}
-                        sprintf(cmd_command, "i2cget 0 %X 0x01 w", device_addr);
-                        // отправляем в консоль
-                        if(readWord(cmd_command, &word)) {  // проверяем ответ
-                            p_data = (uint8_t*)&word;
-                            float raw_data; 
-                            raw_data = (0xFF & p_data[1]) | ((0xFF & (p_data[0])) << 8);
-                            device_data.parameter.power_monitor.currnetFlowing = raw_data * 1.25 / 1000;
-                            fprintf(stdout, "Current %4.2f\r\n", device_data.parameter.power_monitor.currnetFlowing);
-                        }
-                        break;    
-                        // voltage
-                        case 1: //{i2cget 0 0x40 0x02 w}
-                        sprintf(cmd_command, "i2cget 0 %X 0x02 w", device_addr);
-                        // отправляем в консоль
-                        if(readWord(cmd_command, &word)) {  // проверяем ответ
-                            p_data = (uint8_t*)&word;
-                            float raw_data;
-                            raw_data = (0xFF & p_data[1]) | ((0xFF & (p_data[0])) << 8);
-                            device_data.parameter.power_monitor.voltage = raw_data * 1.25 / 1000;
-                            fprintf(stdout, "Volage %4.2f\r\n", device_data.parameter.power_monitor.voltage);
-                        }
-                        break;
-                                                    
-                        case 2: //{i2cget 0 0x40 0x03 w}
-                        //  power
-                        sprintf(cmd_command, "i2cget 0 %X 0x03 w", device_addr);
-                        // отправляем в консоль
-                        if(readWord(cmd_command, &word)) {  // проверяем ответ
-                            p_data = (uint8_t*)&word;
-                            float raw_data;
-                            raw_data = (0xFF & p_data[1]) | ((0xFF & (p_data[0])) << 8);
-                            device_data.parameter.power_monitor.currentPower = raw_data * 1.25;
-                            fprintf(stdout, "Power %4.2f\r\n", device_data.parameter.power_monitor.currentPower);
-                        }
-                        break;
-                    }   
-                }
-                db->insertData(device_data);
-            }
+//            device_addr = db->getDeviceAddrFromName(i2c_Dev_typeName.tmp112.name_text.c_str());
+//            if(device_addr != 0) {                
+//                for(int i=0; i<3; i++) {                    
+//                        switch(i) { // cur
+//                        case 0: //{i2cget 0 0x40 0x01 w}
+//                        sprintf(cmd_command, "i2cget 0 %X 0x01 w", device_addr);
+//                        // отправляем в консоль
+//                        if(readWord(cmd_command, &word)) {  // проверяем ответ
+//                            p_data = (uint8_t*)&word;
+//                            float raw_data; 
+//                            raw_data = (0xFF & p_data[1]) | ((0xFF & (p_data[0])) << 8);
+//                            device_data.parameter.power_monitor.currnetFlowing = raw_data * 1.25 / 1000;
+//                            fprintf(stdout, "Current %4.2f\r\n", device_data.parameter.power_monitor.currnetFlowing);
+//                        }
+//                        break;    
+//                        // voltage
+//                        case 1: //{i2cget 0 0x40 0x02 w}
+//                        sprintf(cmd_command, "i2cget 0 %X 0x02 w", device_addr);
+//                        // отправляем в консоль
+//                        if(readWord(cmd_command, &word)) {  // проверяем ответ
+//                            p_data = (uint8_t*)&word;
+//                            float raw_data;
+//                            raw_data = (0xFF & p_data[1]) | ((0xFF & (p_data[0])) << 8);
+//                            device_data.parameter.power_monitor.voltage = raw_data * 1.25 / 1000;
+//                            fprintf(stdout, "Volage %4.2f\r\n", device_data.parameter.power_monitor.voltage);
+//                        }
+//                        break;
+//                                                    
+//                        case 2: //{i2cget 0 0x40 0x03 w}
+//                        //  power
+//                        sprintf(cmd_command, "i2cget 0 %X 0x03 w", device_addr);
+//                        // отправляем в консоль
+//                        if(readWord(cmd_command, &word)) {  // проверяем ответ
+//                            p_data = (uint8_t*)&word;
+//                            float raw_data;
+//                            raw_data = (0xFF & p_data[1]) | ((0xFF & (p_data[0])) << 8);
+//                            device_data.parameter.power_monitor.currentPower = raw_data * 1.25;
+//                            fprintf(stdout, "Power %4.2f\r\n", device_data.parameter.power_monitor.currentPower);
+//                        }
+//                        break;
+//                    }   
+//                }
+//                db->insertData(device_data);
+//            }
             break;
             
             case dev_i2c_lis3dh:
-//                i16_t value;
-//                u8_t *valueL = (u8_t *)(&value);
-//                u8_t *valueH = ((u8_t *)(&value)+1);
+//                int value;
+//                uint8_t *valueL = (uint8_t*)(&value);
+//                uint8_t *valueH = ((uint8_t*)(&value)+1);
 //
 //                if( !LIS3DH_ReadReg(LIS3DH_OUT_X_L, valueL) )
 //                return MEMS_ERROR;

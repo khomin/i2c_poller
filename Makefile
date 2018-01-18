@@ -27,17 +27,14 @@ DbConnection.o: I2cpoll.o
 global.o: global.o
 	$(CXX) $(CPPFLAGS) ./src/global.cpp -c -o ./build/$@
 	
-Accel.o:
-	$(CXX) $(CPPFLAGS) ./src/Accel.cpp -c -o ./build/$@
-	
 logger.o:
 	$(CXX) $(CPPFLAGS) ./src/logger.cpp -c -o ./build/$@
 	
 main.o: DbConnection.o I2cpoll.o logger.o
 	$(CXX) $(CPPFLAGS) ./main.cpp -c -o ./build/$@
 	
-main: main.o DbConnection.o I2cpoll.o logger.o Accel.o
-	$(CXX) $(CPPFLAGS) ./build/main.o ./build/DbConnection.o ./build/logger.o ./build/I2cpoll.o -o ./build/out -lpq
+main: main.o DbConnection.o I2cpoll.o logger.o
+	$(CXX) $(CPPFLAGS) ./build/main.o ./build/DbConnection.o ./build/logger.o ./build/I2cpoll.o -o ./build/i2cPoller -lpq
 	
 
 install:
