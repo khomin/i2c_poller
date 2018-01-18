@@ -30,9 +30,8 @@ private:
     int currentDeviceType;
 
     std::string getDeviceNameOfType(E_I2c_device typeDev);
-
-    bool parceReply(S_insertData* data, char *repply_buff, int len);
     
+    bool I2c_poll::readWord(char *cmd_command, uint16_t *p_word);    
 };
 
 #endif /* SRC_I2CPOLL_H_ */

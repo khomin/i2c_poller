@@ -9,7 +9,7 @@ logger::~logger() {
 }
 
 void logger::init(const std::string fileName) {
-	this->lockMutex.lock();
+//	this->lockMutex.lock();
 
 	this->logFileName = fileName;
 
@@ -19,11 +19,11 @@ void logger::init(const std::string fileName) {
 		logPath = logFileName;
 	}
 
-    this->lockMutex.unlock();
+//    this->lockMutex.unlock();
 }
 
 void logger::appendToLog(const std::string format, ...) {
-	this->lockMutex.lock();
+//	this->lockMutex.lock();
 
     va_list args;
     va_start(args, format);
@@ -36,7 +36,7 @@ void logger::appendToLog(const std::string format, ...) {
 
     va_end(args);
 
-    this->lockMutex.unlock();
+//    this->lockMutex.unlock();
 }
 
 bool logger::mkpath( std::string path ) {

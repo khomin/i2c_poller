@@ -24,7 +24,7 @@ private:
 
     bool mkpath( std::string path );
 
-    std::mutex lockMutex;
+//    std::mutex lockMutex;
     FILE* file;
     const std::string logFileDir    = "/var/log/i2c/";
     std::string logFileName          = "i2c.log";
