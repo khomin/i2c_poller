@@ -2,15 +2,11 @@
 #include <stdio.h>
 #include <iostream>
 #include <string.h>
-#include <libpq-fe.h>
 #include <thread>
 #include <unistd.h>
 #include <sys/stat.h>
 #include <sys/signal.h>
-
 #include "I2cpoll.h"
-//#include "DbConnection.h"
-//#include "I2cpoll.h"
 #include "logger.h"
 
 #include <vector>
