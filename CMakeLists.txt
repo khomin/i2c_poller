@@ -2,7 +2,9 @@ cmake_minimum_required (VERSION 2.8.1)
 
 ######## Project settings ########
 PROJECT(i2c_poll)
-SET(LICENSE "TBD")
+SET(LICENSE "NAME_LICENCE")
+
+add_compile_options(-std=c++11)
 
 ######## Build and include settings ########
 include_directories(

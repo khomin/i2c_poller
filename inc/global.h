@@ -32,7 +32,7 @@ using namespace std;
         std::string name_text;
     }S_Dev_typeName;
         
-    struct {
+    static struct {
         S_Dev_typeName unknow = {dev_i2c_unknow, "unknow"};
         S_Dev_typeName tmp112 = {dev_i2c_tmp112, "TMP112"};
         S_Dev_typeName lis3dh = {dev_i2c_lis3dh, "LIS3DH"};

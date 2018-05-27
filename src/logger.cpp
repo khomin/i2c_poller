@@ -9,22 +9,16 @@ logger::~logger() {
 }
 
 void logger::init(const std::string fileName) {
-//	this->lockMutex.lock();
+    this->logFileName = fileName;
 
-	this->logFileName = fileName;
-
-	if (mkpath(this->logFileDir) == true) {
-		logPath = logFileDir+logFileName;
-	} else {
-		logPath = logFileName;
-	}
-
-//    this->lockMutex.unlock();
+    if (mkpath(this->logFileDir) == true) {
+            logPath = logFileDir+logFileName;
+    } else {
+            logPath = logFileName;
+    }
 }
 
-void logger::appendToLog(const std::string format, ...) {
-//	this->lockMutex.lock();
-
+void logger::appendToLog(const std::string format, ...)  {
     va_list args;
     va_start(args, format);
 
@@ -33,10 +27,7 @@ void logger::appendToLog(const std::string format, ...) {
     	vfprintf(file, format.c_str(), args);
         fclose(file);
     }
-
     va_end(args);
-
-//    this->lockMutex.unlock();
 }
 
 bool logger::mkpath( std::string path ) {

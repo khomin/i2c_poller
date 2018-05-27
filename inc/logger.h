@@ -2,12 +2,10 @@
 #define LOGGER_H_
 
 #include <string>
-#include <mutex>
 
 class logger {
 public:
-    static logger& Instance(){
-            // согласно стандарту, этот код ленивый и потокобезопасный
+    static logger& Instance() {
             static logger instance;
             return instance;
     };
@@ -24,7 +22,6 @@ private:
 
     bool mkpath( std::string path );
 
-//    std::mutex lockMutex;
     FILE* file;
     const std::string logFileDir    = "/var/log/i2c/";
     std::string logFileName          = "i2c.log";
