@@ -11,7 +11,7 @@
 #include <stdio.h>
 #include <string>
 #include "global.h"
-#include "DbConnection.h"
+#include "../inc/dbConnection.h"
 
 using namespace std;
 

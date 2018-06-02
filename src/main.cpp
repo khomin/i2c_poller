@@ -20,8 +20,8 @@
 #include <wait.h>
 #include <errno.h>
 
-#include "I2cpoll.h"
-#include "logger.h"
+#include "../inc/I2cpoll.h"
+#include "../inc/logger.h"
 
 const std::string pidFileName = "/var/run/sensorProcessPid.pid";
 
@@ -47,7 +47,7 @@ int main(int argc, char** argv)
     int pid;
     
     loggerInstance.init("i2c_monitor.log");
-    loggerInstance.appendToLog("[i2c_monitor] Starting\r\n");
+    loggerInstance.appendToLog("[i2c_monitor] -Starting\r\n");
 
     // создаем потомка
     pid = fork();
@@ -136,7 +136,7 @@ int monitorProc()
         if (pid == -1) // если произошла ошибка
         {
             // запишем в лог сообщение об этом
-            loggerInstance.appendToLog("[MONITOR] Fork failed (%s)\n", strerror(errno));
+            loggerInstance.appendToLog("[i2c_monitor] Fork failed (%s)\n", strerror(errno));
         }
         else if (!pid) // если мы потомок
         {
@@ -168,7 +168,7 @@ int monitorProc()
                 if (status == CHILD_NEED_TERMINATE)
                 {
                     // запишем в лог сообщени об этом        
-                    loggerInstance.appendToLog("[MONITOR] Child stopped\n");
+                    loggerInstance.appendToLog("[i2c_monitor] Child stopped\n");
                     
                     // прервем цикл
                     break;
@@ -176,7 +176,7 @@ int monitorProc()
                 else if (status == CHILD_NEED_WORK) // если требуется перезапустить потомка
                 {
                     // запишем в лог данное событие
-                    loggerInstance.appendToLog("[MONITOR] Child restart\n");
+                    loggerInstance.appendToLog("[i2c_monitor] Child restart\n");
                 }
             }
             else if (siginfo.si_signo == SIGUSR1) // если пришел сигнал что необходимо перезагрузить конфиг
@@ -187,7 +187,7 @@ int monitorProc()
             else // если пришел какой-либо другой ожидаемый сигнал
             {
                 // запишем в лог информацию о пришедшем сигнале
-                loggerInstance.appendToLog("[MONITOR] Signal %s\n", strsignal(siginfo.si_signo));
+                loggerInstance.appendToLog("[i2c_monitor] Signal %s\n", strsignal(siginfo.si_signo));
                 
                 // убьем потомка
                 kill(pid, SIGTERM);
@@ -198,7 +198,7 @@ int monitorProc()
     }
 
     // запишем в лог, что мы остановились
-    loggerInstance.appendToLog("[MONITOR] Stop\n");
+    loggerInstance.appendToLog("[i2c_monitor] Stop\n");
     
     // удалим файл с PID'ом
     unlink(pidFileName.c_str());
@@ -300,38 +300,6 @@ static void signal_error(int sig, siginfo_t *si, void *ptr)
     int    x;
     int    TraceSize;
     char** Messages;
-
-    // запишем в лог что за сигнал пришел
-    loggerInstance.appendToLog("[DAEMON] Signal: %s, Addr: 0x%0.16X\n", strsignal(sig), si->si_addr);
-
-    
-    #if __WORDSIZE == 64 // если дело имеем с 64 битной ОС
-        // получим адрес инструкции которая вызвала ошибку
-        ErrorAddr = (void*)((ucontext_t*)ptr)->uc_mcontext.gregs[REG_RIP];
-    #else 
-        // получим адрес инструкции которая вызвала ошибку
-        ErrorAddr = (void*)((ucontext_t*)ptr)->uc_mcontext.gregs[REG_EIP];
-    #endif
-
-    // произведем backtrace чтобы получить весь стек вызовов 
-    TraceSize = backtrace(Trace, 16);
-    Trace[1] = ErrorAddr;
-
-    // получим расшифровку трасировки
-    Messages = backtrace_symbols(Trace, TraceSize);
-    if (Messages)
-    {
-        loggerInstance.appendToLog("== Backtrace ==\n");
-        
-        // запишем в лог
-        for (x = 1; x < TraceSize; x++)
-        {
-            loggerInstance.appendToLog("%s\n", Messages[x]);
-        }
-        
-        loggerInstance.appendToLog("== End Backtrace ==\n");
-        free(Messages);
-    }
 
     loggerInstance.appendToLog("[DAEMON] Stopped\n");
     
