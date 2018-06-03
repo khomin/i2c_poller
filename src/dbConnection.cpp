@@ -9,6 +9,9 @@
 #include <stdio.h>
 #include "../inc/dbConnection.h"
 #include "postgresql/libpq-fe.h"
+#include "../inc/logger.h"
+
+static logger& loggerInstance = logger::Instance();
 
 DbConnection::DbConnection()
 {
@@ -38,10 +41,12 @@ int DbConnection::getDeviceIdFromName(std::string name_device) {
         ExecStatusType exeResult = PQresultStatus(res);
         if(exeResult != PGRES_TUPLES_OK) {
             fprintf(stderr, "ERROR:%s\r\n",  PQerrorMessage(this->dbSettings.dbConn));
+            loggerInstance.appendToLog("DB: open -ERR");
         } else {
             if(PQnfields(res) >0) {
                 id = atoi(PQgetvalue(res, 0, 0));
-                fprintf(stdout, "id sensor %d\r\n", id);        
+                fprintf(stdout, "id sensor %d\r\n", id);
+                loggerInstance.appendToLog("DB: open -OK");
             }
         }
     }
@@ -85,15 +90,6 @@ bool DbConnection::insertData(S_insertData data) {
             sprintf((char*)quere_buf, tBuff, device_id, data.parameter.temp.temp);
             break;
             
-        case dev_i2c_lis3dh: 
-            fprintf(stderr, "Db:i2c dev type %s\r\n", 
-                i2c_Dev_typeName.lis3dh.name_text.c_str());
-            device_id = getDeviceIdFromName(i2c_Dev_typeName.lis3dh.name_text);
-            strcpy((char*)tBuff, "INSERT INTO i2c_data(i2c_data_device_id, i2c_data_json) VALUES (%d, '{\"x\":%4.2f,\"y\":%4.2f,\"z\":%4.2f,\"velocityX\":%4.2f,\"velocityY\":%4.2f,\"velocityZ\":%4.2f,\"isInited\":%d}'::json);");
-            sprintf((char*)quere_buf, tBuff, device_id, data.parameter.accel.x, data.parameter.accel.y, data.parameter.accel.z,
-                    data.parameter.accel.velocityX, data.parameter.accel.velocityY, data.parameter.accel.velocityZ,
-                    data.parameter.accel.isInited);
-        break;
         case dev_i2c_ina260: 
             fprintf(stderr, "Db:i2c dev type %s\r\n",
                 i2c_Dev_typeName.ina260.name_text.c_str());
@@ -104,14 +100,7 @@ bool DbConnection::insertData(S_insertData data) {
                     data.parameter.power_monitor.currnetFlowing,
                     data.parameter.power_monitor.voltage);
         break;
-        case dev_i2c_txs02324:             
-            fprintf(stderr, "Db:i2c dev type %s\r\n", 
-                i2c_Dev_typeName.txs02324.name_text.c_str());
-            device_id = getDeviceIdFromName(i2c_Dev_typeName.txs02324.name_text);
-            strcpy((char*)tBuff, "INSERT INTO i2c_data(i2c_data_device_id, i2c_data_json) VALUES (%d,'{\"simCardPowerIsUp\":%d,\"currentSimSlot\":%d}'::json);");
-            sprintf((char*)quere_buf, tBuff, device_id, data.parameter.sim_switcher.cardPowerIsUp,
-                    device_id, data.parameter.sim_switcher.currentSimSlot);
-        break;
+
         case dev_i2c_unknow:
             fprintf(stderr, "Db:i2c dev type %s\r\n",
                 i2c_Dev_typeName.unknow.name_text.c_str());
@@ -151,7 +140,7 @@ void DbConnection::exeptConnectError(PGconn *pConn) {
 
 bool DbConnection::disconnect() {
     fprintf(stdout, "Connection closed\r\n");
-//    delete dbSettings.dbConn;
+    delete dbSettings.dbConn;
     return true;
 }
 

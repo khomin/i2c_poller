@@ -10,7 +10,7 @@ public:
             return instance;
     };
     void init(const std::string fileName);
-    void appendToLog(const std::string format, ...);
+    void appendToLog(std::string format, ...);
 private:
     //конструктор и деструктор недоступны
     logger();
@@ -23,8 +23,8 @@ private:
     bool mkpath( std::string path );
 
     FILE* file;
-    const std::string logFileDir    = "/var/log/i2c/";
-    std::string logFileName          = "i2c.log";
+    const std::string logFileDir    = "/var/log/";
+    std::string logFileName          = "i2c_poller.log";
     std::string logPath;
 };
 

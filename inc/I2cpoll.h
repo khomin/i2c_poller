@@ -12,26 +12,28 @@
 #include <string>
 #include "global.h"
 #include "../inc/dbConnection.h"
+#include <thread>
 
 using namespace std;
 
-class I2c_poll {
+class I2cPoll {
 public:
-    I2c_poll();
-    virtual ~I2c_poll();
-    void* pollExect();
-          
+    I2cPoll();
+    virtual ~I2cPoll();
+
+    void pollExect();
+
 private:
         
     DbConnection * db = new DbConnection();
 
     static const E_I2c_device startDeviceType = dev_i2c_tmp112;
-    static const E_I2c_device endTypeDeviceType = dev_i2c_txs02324;
+    static const E_I2c_device endTypeDeviceType = dev_i2c_ina260;
     int currentDeviceType;
 
     std::string getDeviceNameOfType(E_I2c_device typeDev);
     
-    bool readWord(char *cmd_command, uint16_t *p_word);    
+    bool readWord(char *cmd_command, uint16_t *p_word);
 };
 
 #endif /* SRC_I2CPOLL_H_ */
