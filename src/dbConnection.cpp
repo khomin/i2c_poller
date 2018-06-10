@@ -82,14 +82,7 @@ bool DbConnection::insertData(S_insertData data) {
     // получить id имени типа
     // сформировать данные по типу
     switch(data.device_type) {
-        case dev_i2c_tmp112: 
-            fprintf(stderr, "Db:i2c dev type %s\r\n",
-                i2c_Dev_typeName.tmp112.name_text.c_str());
-            device_id = getDeviceIdFromName(i2c_Dev_typeName.tmp112.name_text);
-            strcpy((char*)tBuff, "INSERT INTO i2c_data(i2c_data_device_id, i2c_data_json) VALUES (%d, '{\"temp\":%4.2f}'::json);");
-            sprintf((char*)quere_buf, tBuff, device_id, data.parameter.temp.temp);
-            break;
-            
+
         case dev_i2c_ina260: 
             fprintf(stderr, "Db:i2c dev type %s\r\n",
                 i2c_Dev_typeName.ina260.name_text.c_str());
@@ -140,7 +133,6 @@ void DbConnection::exeptConnectError(PGconn *pConn) {
 
 bool DbConnection::disconnect() {
     fprintf(stdout, "Connection closed\r\n");
-    delete dbSettings.dbConn;
     return true;
 }
 

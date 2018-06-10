@@ -15,8 +15,9 @@ user="root"
 
 name="i2c_poller"
 pid_file="/var/run/$name.pid"
-stdout_log="/var/log/$name.log"
-stderr_log="/var/log/$name.err"
+log_dir="/var/log/i2c_poller/"
+stdout_log="$log_dir/$name.log"
+stderr_log="$log_dir/$name.err"
 
 get_pid() {
     cat "$pid_file"
@@ -32,7 +33,9 @@ case "$1" in
         echo "Already started"
     else
         echo "Starting $name"
-        cd "$dir"
+#	rm -rf $log_dir
+#        mkdir $log_dir
+	cd "$dir"
         if [ -z "$user" ]; then
             sudo $cmd >> "$stdout_log" 2>> "$stderr_log" &
         else

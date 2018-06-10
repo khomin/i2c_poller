@@ -34,25 +34,6 @@ void I2cPoll::pollExect() {
 	// формируем запрос
 	switch(currentDeviceType) {
 
-	case dev_i2c_tmp112: {
-		device_addr = db->getDeviceAddrFromName(i2c_Dev_typeName.tmp112.name_text.c_str());
-		if(device_addr != 0) {
-			sprintf(cmd_command, "i2cget -y 0 0x%X 0x00 w\r\n", device_addr);
-			res = readWord(cmd_command, &word);
-			if(res) {  // проверяем ответ
-				p_data = (uint8_t*)&word;
-				device_data.parameter.temp.temp = (p_data[0] * 256 + p_data[1]) / 16;
-				if(device_data.parameter.temp.temp > 2047) {
-					device_data.parameter.temp.temp -= 4096;
-				}
-				device_data.parameter.temp.temp = device_data.parameter.temp.temp * 0.0625;
-				fprintf(stdout, "Temp %4.2f", device_data.parameter.temp.temp);
-				db->insertData(device_data);
-			}
-		}
-	}
-	break;
-
 	case dev_i2c_ina260: {
 		device_addr = db->getDeviceAddrFromName(i2c_Dev_typeName.ina260.name_text.c_str());
 		if(device_addr != 0) {

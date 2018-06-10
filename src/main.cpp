@@ -48,18 +48,19 @@ int main(int argc, char** argv)
 	int status;
 	int pid;
 
+	loggerInstance.init();
 	loggerInstance.appendToLog("[i2c_monitor] -Starting\r\n");
 
 	// создаем потомка
 	pid = fork();
 
-	if (pid == -1) // если не удалось запустить потомка
-	{
+	if (pid == -1) {
+		// если не удалось запустить потомка
 		// выведем на экран ошибку и её описание
 		printf("Error: Start Daemon failed (%s)\n", strerror(errno));
 		return -1;
-	} else if (!pid) // если это потомок
-	{
+	} else if (!pid) {
+		// если это потомок
 		// данный код уже выполняется в процессе потомка
 		// разрешаем выставлять все  биты прав на создаваемые файлы,
 		// иначе у нас могут быть проблемы с правами доступа
@@ -72,18 +73,12 @@ int main(int argc, char** argv)
 		// к примеру с размантированием дисков
 		chdir("/");
 
-		// закрываем дискрипторы ввода/вывода/ошибок, так как нам они больше не понадобятся
-		close(STDIN_FILENO);
-		close(STDOUT_FILENO);
-		close(STDERR_FILENO);
-
 		// Данная функция будет осуществлять слежение за процессом
 		status = monitorProc();
 
 		return status;
-	}
-	else // если это родитель
-	{
+	} else {
+		// если это родитель
 		// завершим процес, т.к. основную свою задачу (запуск демона) мы выполнили
 		return 0;
 	}
@@ -91,9 +86,9 @@ int main(int argc, char** argv)
 
 
 int monitorProc() {
-	int      pid;
-	int      status;
-	int      need_start = 1;
+	int pid;
+	int status;
+	int is_need_start = 1;
 	sigset_t sigset;
 	siginfo_t siginfo;
 
@@ -123,12 +118,12 @@ int monitorProc() {
 	for (;;)
 	{
 		// если необходимо создать потомка
-		if (need_start) {
+		if (is_need_start) {
 			// создаём потомка
 			pid = fork();
 		}
 
-		need_start = 1;
+		is_need_start = 1;
 
 		if (pid == -1) // если произошла ошибка
 		{
@@ -183,7 +178,7 @@ int monitorProc() {
 			else if (siginfo.si_signo == SIGUSR1) // если пришел сигнал что необходимо перезагрузить конфиг
 			{
 				kill(pid, SIGUSR1); // перешлем его потомку
-				need_start = 0; // установим флаг что нам не надо запускать потомка заново
+				is_need_start = 0; // установим флаг что нам не надо запускать потомка заново
 			}
 			else // если пришел какой-либо другой ожидаемый сигнал
 			{

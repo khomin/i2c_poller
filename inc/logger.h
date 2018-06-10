@@ -9,7 +9,7 @@ public:
             static logger instance;
             return instance;
     };
-    void init(const std::string fileName);
+    void init();
     void appendToLog(std::string format, ...);
 private:
     //конструктор и деструктор недоступны
@@ -23,8 +23,8 @@ private:
     bool mkpath( std::string path );
 
     FILE* file;
-    const std::string logFileDir    = "/var/log/";
-    std::string logFileName          = "i2c_poller.log";
+    const std::string logFileDir    = "/var/log/i2c_poller/";
+    std::string logFileName          = "i2c_poller_exe.log";
     std::string logPath;
 };
 

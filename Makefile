@@ -26,7 +26,7 @@ main.o:
 	$(CXX) $(CXXFLAGS) ./src/main.cpp -c -o ./bin/$@ 
 
 main: main.o I2cpoll.o logger.o global.o
-	$(CXX) $(CXXFLAGS) ./bin/main.o ./bin/I2cpoll.o ./bin/logger.o ./bin/global.o ./bin/dbConnection.o -o ./bin/i2c $(LIB)
+	$(CXX) $(CXXFLAGS) ./bin/main.o ./bin/I2cpoll.o ./bin/logger.o ./bin/global.o ./bin/dbConnection.o -o ./bin/i2c_poller $(LIB)
 
 clean:
 	rm -f ./bin/*

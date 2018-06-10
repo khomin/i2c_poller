@@ -27,7 +27,7 @@ private:
         
     DbConnection * db = new DbConnection();
 
-    static const E_I2c_device startDeviceType = dev_i2c_tmp112;
+    static const E_I2c_device startDeviceType = dev_i2c_ina260;
     static const E_I2c_device endTypeDeviceType = dev_i2c_ina260;
     int currentDeviceType;
 

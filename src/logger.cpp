@@ -9,9 +9,7 @@ logger::logger() {
 logger::~logger() {
 }
 
-void logger::init(const std::string fileName) {
-	this->logFileName = fileName;
-
+void logger::init() {
 	if (mkpath(this->logFileDir) == true) {
 		logPath = logFileDir + logFileName;
 	} else {
