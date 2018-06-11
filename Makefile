@@ -1,6 +1,3 @@
-#LIB= -lpq -lgps#-lssl -lcrypto #-levent -levent_core
-#INC= -I$(CANTCOAP_DIR) -I$(RAPIDJSON_DIR)
-
 CXX=g++
 LIB=-lpq
 #CXX=arm-linux-gnueabi-g++

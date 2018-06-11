@@ -9,9 +9,10 @@
 # Description:       Enable service provided by daemon.
 ### END INIT INFO
 
-dir="/home/khomin/Project/kbo_i2c_poller/bin/"
-cmd="/home/khomin/Project/kbo_i2c_poller/bin/i2c_poller"
+dir="/home/khomin/Project/i2c_poller/bin/"
+cmd="/home/khomin/Project/i2c_poller/bin/i2c_poller"
 user="root"
+
 
 name="i2c_poller"
 pid_file="/var/run/$name.pid"
@@ -33,8 +34,8 @@ case "$1" in
         echo "Already started"
     else
         echo "Starting $name"
-#	rm -rf $log_dir
-#        mkdir $log_dir
+	rm -rf $log_dir
+	mkdir $log_dir
 	cd "$dir"
         if [ -z "$user" ]; then
             sudo $cmd >> "$stdout_log" 2>> "$stderr_log" &
