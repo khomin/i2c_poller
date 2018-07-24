@@ -54,10 +54,10 @@ private:
         
 public:
    
-        bool insertData(S_insertData data);
-        int getDeviceIdFromName(std::string name_device);
-        int getDeviceAddrFromName(std::string name_device);
-        bool isConnecting();
+	bool insertData(S_insertData data);
+	int getDeviceIdFromName(std::string name_device);
+	int getDeviceAddrFromName(std::string name_device);
+	bool isConnecting();
 	bool disconnect();
 	void exeptConnectError(PGconn *pConn);
 };

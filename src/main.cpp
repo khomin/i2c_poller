@@ -289,7 +289,6 @@ int workProc()
 void destroyWorkThread() {
 	loggerInstance.appendToLog("[DAEMON] destroyd-OK\n");
 	threads.~vector();
-	delete i2c_poller;
 }
 
 static void signal_error(int sig, siginfo_t *si, void *ptr)

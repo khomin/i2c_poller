@@ -14,7 +14,7 @@
 static logger& loggerInstance = logger::Instance();
 
 I2cPoll::I2cPoll() {
-	db = new DbConnection();
+	this->db = new DbConnection();
 	if(db->isConnecting()) {
 		loggerInstance.appendToLog("I2cPoll: db-connected-OK\r\n");
 	} else {
